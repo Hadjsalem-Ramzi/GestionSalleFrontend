@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="button2"><button class="btn btn-success" (click)="newSalle()">Ajouter</button></div>
+  <div class="card" *ngIf="!ShownFormNewSalle">
+    <div class="card-header">Listes des salles</div>
+    <div class="card-body">
+      <table class="table">
+        <thead><tr><th>Nom</th><th>capacite</th><th>Disponibilité</th><th>localisation</th></tr></thead>
+        <tbody>
+        <tr *ngFor="let s of salles" >
+          <td>{{s.nom}}</td>
+          <td>{{s.capacite}}</td>
+          <td>{{s.localisation}}</td>
+          <td>{{s.disponibilite}}</td>
+          <td><button class="btn btn-warning" (click)="editSalle(s)">Modifier</button></td>
+          <td><button class="btn btn-danger" (click)="deleteSalle(s)">supprimer</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="ShownFormNewSalle">
+    <div class="card-header">{{ editingSalle ? 'Modifier Salle' : 'New Salle' }}</div>
+    <div class="card-body">
+      <form [formGroup]="salleForm"  (ngSubmit)="handleNewSalle()" >
+     <div class="form-group">
+      <label for="nom" >Nom</label>
+     <input type="text" id="nom"  class="form-control"  formControlName="nom" >
+       <small *ngIf="salleForm.controls['nom'].errors && salleForm.controls['nom'].touched" class="text-danger">
+         {{ getErrorMessage('nom', salleForm.controls['nom'].errors) }}
+       </small>
+     </div>
+
+      <div class="form-group">
+        <label for="capacite" >capacite</label>
+        <input type="text" id="capacite"  class="form-control" formControlName="capacite" >
+        <small *ngIf="salleForm.controls['capacite'].errors && salleForm.controls['capacite'].touched" class="text-danger">
+          {{ getErrorMessage('capacite', salleForm.controls['capacite'].errors) }}
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="disponibilite" >disponibilite</label>
+        <input type="text" id="disponibilite"  class="form-control" formControlName="disponibilite">
+        <small *ngIf="salleForm.controls['disponibilite'].errors && salleForm.controls['disponibilite'].touched" class="text-danger">
+          {{ getErrorMessage('disponibilite', salleForm.controls['disponibilite'].errors) }}
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="localisation" >localisation</label>
+        <input type="text" id="localisation"  class="form-control" formControlName="localisation" >
+        <small *ngIf="salleForm.controls['localisation'].errors && salleForm.controls['localisation'].touched" class="text-danger">
+          {{ getErrorMessage('localisation', salleForm.controls['localisation'].errors) }}
+        </small>
+      </div><br>
+
+     <div class="button-group">
+       <button class="btn btn-success" type="submit">{{ editingSalle ? 'Update' : 'Enregistrer' }}</button>
+    <button class="btn btn-danger" (click)="handlecancelCreation()" type="submit">Annuler</button>
+     </div>
+    </form>
+  </div>
+  </div>
+</div>
+
+

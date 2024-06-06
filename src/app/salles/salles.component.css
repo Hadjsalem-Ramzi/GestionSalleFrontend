@@ -1,0 +1,7 @@
+.button-group button {
+  margin-right: 20px; /* Ajoute une marge à droite pour séparer les boutons */
+}
+.button2 button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
